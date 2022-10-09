@@ -14,6 +14,56 @@
 
           Upon submitting the form, simply print the value to the console
       -->
+      <form [formGroup]="projectForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="prjname">Project Name</label>
+          <input
+            type="text"
+            id="prjname"
+            formControlName="prjname"
+            class="form-control">
+            <span
+              *ngIf="!projectForm.get('prjname').valid && projectForm.get('prjname').touched"
+              class="help-block">
+              <span
+              *ngIf="projectForm.get('prjname').errors['nameIsForbidden']"
+              class="help-block">This name is invalid!</span>
+              <span
+              *ngIf="projectForm.get('prjname').errors['required']"
+              class="help-block">This field is required!</span>
+            </span>
+        </div>
+        <div class="form-group">
+          <label for="email">E-mail</label>
+          <input
+            type="text"
+            id="email"
+            formControlName="email"
+            class="form-control">
+            <span
+              *ngIf="!projectForm.get('email').valid && projectForm.get('email').touched"
+              class="help-block">
+              <span
+              *ngIf="projectForm.get('email').errors['email']"
+              class="help-block">This email is invalid!</span>
+              <span
+              *ngIf="projectForm.get('email').errors['required']"
+              class="help-block">This field is required!</span>
+            </span>
+        </div>
+        <div class="form-group">
+          <label for="status">Status</label>
+          <select
+            id="status"
+            formControlName="status"
+            class="form-control">
+            <option
+              *ngFor="let status of statusOps"
+              [value]="status">{{ status }}</option>
+          </select>
+        </div>
+        <button class="btn btn-primary" type="submit">Submit</button>
+      </form>
     </div>
   </div>
 </div>
